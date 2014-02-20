@@ -15,6 +15,7 @@ This will send 1 (one) to the Teensy, which will then respond with
 password number one, stored in flash memory.
 
 example: ./teensykey 84 | tail -n 1 | xclip -i -selection clipboard
+
 This will grab password 84, chop off all the debug info (if any)
 and put the password on the clipboard.
 
@@ -24,7 +25,7 @@ escaped. Each password has a comma after the last enclosing
 double-quote. I can import this into the Teensy sketch by going to the
 line "const char passwords[][64] = {" and running:
 
-:r <mypasswordfile>
+:r &lt;mypasswordfile&gt;
 
 (No < or >)
 
