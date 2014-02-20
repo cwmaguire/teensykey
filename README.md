@@ -17,3 +17,15 @@ password number one, stored in flash memory.
 example: ./teensykey 84 | tail -n 1 | xclip -i -selection clipboard
 This will grab password 84, chop off all the debug info (if any)
 and put the password on the clipboard.
+
+I'm using Vim and storing my passwords in a file. All of the passwords
+are double-quoted with backslash and double-quotes within the strings
+escaped. Each password has a comma after the last enclosing
+double-quote. I can import this into the Teensy sketch by going to the
+line "const char passwords[][64] = {" and running:
+
+:r <mypasswordfile>
+
+(No < or >)
+
+DO NOT COMMIT YOUR PASSWORDS TO A PUBLIC REPO!
