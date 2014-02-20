@@ -25,7 +25,7 @@ const char passwords[][64] = {
 "1234",
 "TOP SECRET",
 "Samsung1"
-}
+};
 
 void loop() {
   int n, password_index;
