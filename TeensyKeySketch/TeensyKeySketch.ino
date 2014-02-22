@@ -7,12 +7,16 @@
    You must select Raw HID from the "Tools > USB Type" menu
 */
 
+// Teensy 3.0 has the LED on pin 13
+const int ledPin = 13;
+
 void setup() {
   Serial.begin(9600);
   Serial.println(F("RawHID Example"));
-  for (int i=0; i<7; i++) {
-    pinMode(i, OUTPUT);
-  }
+
+  pinMode(ledPin, OUTPUT);
+
+  blink(3);
 }
 
 // RawHID packets are always 64 bytes
@@ -32,8 +36,11 @@ void loop() {
   int password_char_index = 0;
 
   Serial.println(F("Waiting for password index ..."));
+  blink(1);
+
   n = RawHID.recv(buffer, waitTimeout);
   if (n > 0) {
+
     // the computer sent a message.
     Serial.print(F("Received packet, first byte: "));
     Serial.println((int)buffer[0]);
@@ -58,11 +65,23 @@ void loop() {
     }
 
     // actually send the packet
-    n = RawHID.send(buffer, 100);
+    n = RawHID.send(buffer, 200);
     if (n > 0) {
       Serial.println(F("Transmit password"));
     } else {
       Serial.println(F("Unable to transmit packet"));
     }
+
+    blink(2);
+  }
+}
+
+void blink(int times){
+  int i;
+  for(i = 0; i < times; i++){
+    digitalWrite(ledPin, HIGH);
+    delay(100);
+    digitalWrite(ledPin, LOW);
+    delay(100);
   }
 }
